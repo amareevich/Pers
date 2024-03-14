@@ -1,8 +1,8 @@
 package perkpackege;
 //разбойник
 public class Outlaw extends Person{
-    public Outlaw (String name, int age) {
-        super(name, age, 20, 100, 50, 20, "knife", 20);
+    public Outlaw (String name, int age, int x, int y) {
+        super(name, age, 20, 100, 50, 20, "knife", 20, 1, x, y);
     }
 
     public void attack (Person person) {
@@ -15,6 +15,6 @@ public class Outlaw extends Person{
 
     @Override
     public String toString() {
-        return super.name;
+        return String.format("[Разбойник] %s", super.name + " " + position.toString());
     }
 }

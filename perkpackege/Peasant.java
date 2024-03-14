@@ -4,8 +4,8 @@ public class Peasant extends Person{
     int arrows;
     boolean ingame = true;
 
-    public Peasant (String name, int age) {
-        super(name, age, 20, 100, 50, 20, "not", 20);
+    public Peasant (String name, int age, int x, int y) {
+        super(name, age, 20, 100, 50, 20, "not", 20, 1, x, y);
         this.arrows = 100;
     }
 
@@ -25,6 +25,6 @@ public class Peasant extends Person{
 
     @Override
     public String toString() {
-        return super.name;
+        return String.format("[Крестьянин] %s", super.name + " " + position.toString());
     }
 }

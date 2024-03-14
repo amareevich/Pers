@@ -2,8 +2,8 @@ package perkpackege;
 //монах
 public class Monk extends Person {
     int mana;
-    public Monk (String name, int age) {
-        super(name, age, 20, 100, 50, 20, "book", 20);
+    public Monk (String name, int age, int x, int y) {
+        super(name, age, 20, 100, 50, 20, "book", 20,1, x, y);
         this.mana = 40;
     }
 
@@ -23,6 +23,6 @@ public class Monk extends Person {
 
     @Override
     public String toString() {
-        return super.name;
+        return String.format("[Монах] %s", super.name + " " + position.toString());
     }
 }

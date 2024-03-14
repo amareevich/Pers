@@ -2,8 +2,8 @@ package perkpackege;
 //Колдун
 public class Magician extends Person {
     int mana;
-    public Magician (String name, int age) {
-        super(name, age, 20, 100, 50, 20, "book", 20);
+    public Magician (String name, int age, int x, int y) {
+        super(name, age, 20, 100, 50, 20, "book", 20, 1, x, y);
         this.mana = 20;
     }
 
@@ -18,6 +18,6 @@ public class Magician extends Person {
 
     @Override
     public String toString() {
-        return super.name;
+        return String.format("[Колдун] %s", super.name + " " + position.toString());
     }
 }
