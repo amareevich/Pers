@@ -7,7 +7,7 @@ public class Point {
     private int heigth;
 
     public Point(int x, int y) {
-        curX = x;
+        this.curX = x;
         curY = y;
         width = 10;
         heigth = 10;
@@ -20,7 +20,7 @@ public class Point {
     public void setY(int y) {curY = y;}
 
     public boolean isMove (int x, int y) {
-        return x >= 0 && x < width && y >=0 && y < heigth;
+        return x >= 0 && x < width && y >= 0 && y < heigth;
     }
 
     public void moveTo (int dx, int dy) {

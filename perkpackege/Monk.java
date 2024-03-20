@@ -1,9 +1,12 @@
 package perkpackege;
+
+import java.util.ArrayList;
+
 //монах
 public class Monk extends Person {
     int mana;
     public Monk (String name, int age, int x, int y) {
-        super(name, age, 20, 100, 50, 20, "book", 20,1, x, y);
+        super(name, age, 20, 100, 50, 20, "book", 20,1, x, y, 1);
         this.mana = 40;
     }
 
@@ -24,5 +27,10 @@ public class Monk extends Person {
     @Override
     public String toString() {
         return String.format("[Монах] %s", super.name + " " + position.toString());
+    }
+
+    @Override
+    public void step(ArrayList<Person> arr) {
+        
     }
 }

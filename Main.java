@@ -6,16 +6,25 @@ public class Main {
 
     static ArrayList<Person> red = new ArrayList<>();
     static ArrayList<Person> blue = new ArrayList<>();
-
+    static ArrayList<Person> all = new ArrayList<>();
     public static void  main (String [] args) {
         createTeam(red, 10, 0);
         createTeam(blue, 10, 3);
- 
-        Crossbowman cr = new Crossbowman("Алексей", 32, 1, 2);
-        Person target = cr.findNearsEnemy(red);
-        System.out.println("Ближайший противник" + target);
-    }
+        red.sort(new PrioritySort());
+        blue.sort(new PrioritySort());
+        all.addAll(red);
+        all.addAll(blue);
+        all.sort(new PrioritySort());
 
+        for (Person p : all) {
+            if(red.contains(p)) {
+                p.step(blue);
+            } else {
+                p.step(red);
+            }
+        }
+    }
+    
     public static void createTeam (ArrayList<Person> team, int num, int start) {
         Random rdn = new Random();
         while (--num >= 0) {
@@ -28,10 +37,10 @@ public class Main {
                 team.add(new Magician(getName(), 20, 0, num));
                 break;
                 case 2:
-                team.add(new Spearman(getName(), 20, start * 3, num));
+                team.add(new Spearman(getName(), 20, 0, num));
                 break;
                 case 3:
-                team.add(new Peasant(getName(), 20, 0, num));
+                team.add(new Peasant(getName(), 20, start * 3, num));
                 break;
                 case 4:
                 team.add(new Monk(getName(), 20, 9, num));

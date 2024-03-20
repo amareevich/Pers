@@ -5,9 +5,11 @@ import java.util.ArrayList;
 //арбалетчик
 public class Crossbowman extends Person {
     int arrow;
+
     public Crossbowman (String name, int age, int x, int y) {
-        super(name, age, 20, 100, 50, 20, "arrow", 20, 1 , x, y);
+        super(name, age, 20, 100, 50, 20, "arrow", 20, 1 , x, y, 3);
         this.arrow = 40;
+
     }
 
     public void attack (Person person) {
@@ -34,5 +36,27 @@ public class Crossbowman extends Person {
     @Override
     public String toString() {
         return String.format("[Арбалетчик] %s", super.name + " " + position.toString());
+    }
+
+
+    protected void shot (Person target) {
+        armor--;
+        //double dist = super.distanceTo(target);
+        int res = target.getDamage(damage);
+    }
+
+    @Override
+    public void step(ArrayList<Person> arr) {
+        if (health < 0 || armor < 0) {
+            if (armor < 0) {
+                System.out.println(name + ":" + "подайте стрел");
+            }
+            return;
+        }
+
+        Person target = this.findNearsEnemy(arr);
+        if (target != null) {
+            shot(target);
+        }
     }
 }
