@@ -1,4 +1,5 @@
 package perkpackege;
+
 public class Point {
     private int curX;
     private int curY;
@@ -6,9 +7,9 @@ public class Point {
     private int width;
     private int heigth;
 
-    public Point(int x, int y) {
+    public  Point(int x, int y) {
         this.curX = x;
-        curY = y;
+        this.curY = y;
         width = 10;
         heigth = 10;
     }
@@ -32,5 +33,18 @@ public class Point {
 
     public String toString () {
         return curX + ":" + curY;
+    }
+
+    public Point getDelta (Point target) {
+        return new Point(target.getX() - getX(), target.getY() - getY());
+    }
+
+    public boolean check (Point fcor) {
+        return curX == fcor.curX && curY == fcor.curY;
+    }
+
+    public void add (int dx, int dy) {
+        curX += dx;
+        curY += dy;
     }
 }

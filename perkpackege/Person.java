@@ -1,5 +1,4 @@
 package perkpackege;
-
 import java.util.Random;
 
 public abstract class Person implements interStep{

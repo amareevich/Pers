@@ -42,11 +42,11 @@ public class Crossbowman extends Person {
     protected void shot (Person target) {
         armor--;
         //double dist = super.distanceTo(target);
-        int res = target.getDamage(damage);
+        //int res = target.getDamage(damage);
     }
 
     @Override
-    public void step(ArrayList<Person> arr) {
+    public void step(ArrayList<Person> arr, ArrayList<Person> friends) {
         if (health < 0 || armor < 0) {
             if (armor < 0) {
                 System.out.println(name + ":" + "подайте стрел");

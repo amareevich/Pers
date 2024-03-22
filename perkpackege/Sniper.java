@@ -23,7 +23,7 @@ public class Sniper extends Person{
         return String.format("[Снайпер] %s", super.name + " " + position.toString());
     }
     @Override
-    public void step(ArrayList<Person> arr) {
+    public void step(ArrayList<Person> arr, ArrayList<Person> friends) {
         
     }
 }

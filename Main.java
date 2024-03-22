@@ -18,9 +18,9 @@ public class Main {
 
         for (Person p : all) {
             if(red.contains(p)) {
-                p.step(blue);
+                p.step(blue,red);
             } else {
-                p.step(red);
+                p.step(red,blue);
             }
         }
     }
@@ -60,3 +60,6 @@ public class Main {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
     }
 }
+
+
+//git push -u origin main

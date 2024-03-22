@@ -30,7 +30,7 @@ public class Monk extends Person {
     }
 
     @Override
-    public void step(ArrayList<Person> arr) {
+    public void step(ArrayList<Person> arr, ArrayList<Person> friends) {
         
     }
 }
