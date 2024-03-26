@@ -9,14 +9,35 @@ public class Outlaw extends Person{
         super(name, age, 20, 100, 50, 20, "knife", 20, 1, x, y, 2);
     }
 
-    @Override
-    public String toString() {
-        return String.format("[Разбойник] %s", super.name + " " + position.toString());
+    public void attack (Person person) {
+        person.health -= this.power;
+        history = "attack" + person.name + "нанесено урона" + power;
     }
 
-    public void attack (Person target) {
-        int damaGe = target.getDamage(damage);
-        System.out.println( this + "Наносит урон" + damaGe);
+    @Override
+    public String toString() {
+        return String.format("[Орчер] %s", super.name + " " + position.toString());
+    }
+
+
+    protected void shot (Person target) {
+        armor -= 10;
+    }
+
+    public Person findNearsEnemy(ArrayList<Person> enemy) {
+        Person target = null;
+        double distance = Integer.MAX_VALUE;
+
+        for(Person p : enemy) {
+            double n = p.distanceTo(this);
+
+            if(n < distance) {
+                distance = n;
+                target = p;
+            }
+        }
+
+        return target;
     }
 
     public void move (Person target, ArrayList<Person> friends) {
@@ -39,31 +60,14 @@ public class Outlaw extends Person{
 
         for (Person f : friends) {
             f.position.check(newPos); 
-            return;
         }
         position = newPos;
-        System.out.println(this);
-        //System.out.println(vy);
+        history = name + "переместился на позицию" + position;
+
     }
-
-    public Person findNearsEnemy(ArrayList<Person> enemy) {
-        Person target = null;
-        double distance = Integer.MAX_VALUE;
-
-        for(Person p : enemy) {
-            double n = p.distanceTo(this);
-
-            if(n < distance) {
-                distance = n;
-                target = p;
-            }
-        }
-
-        return target;
-    }
-
+    
     @Override
-    public void step(ArrayList<Person> enymies , ArrayList<Person> friends) {
+    public void step(ArrayList<Person> enymies, ArrayList<Person> friends) {
         if (health <= 0) {
             return;
         }
@@ -76,5 +80,16 @@ public class Outlaw extends Person{
         else {
             move(target, friends);
         }
+    }
+
+    @Override
+    public String getInfo() {
+        return "Орчер";
+    }
+
+    @Override
+    
+    public void getInfo(String str) {
+        super.getInfo(str);
     }
 }

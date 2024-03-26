@@ -1,20 +1,23 @@
 package perkpackege;
 import java.util.ArrayList;
 
-//копейщик
-public class Spearman extends Person {
-    public Spearman (String name, int age, int x, int y) {
-        super(name, age, 20, 100, 50, 20, "arrow", 20, 1,  x, y, 2);
+//арбалетчик
+public class Orcher extends Person {
+    int arrow;
+
+    public Orcher (String name, int age, int x, int y) {
+        super(name, age, 20, 100, 50, 20, "arrow", 20, 1 , x, y, 3);
+        this.arrow = 40;
+
     }
 
     public void attack (Person person) {
         person.health -= this.power;
-        history = "attack" + person.name + "нанесено урона" + power;
     }
 
     @Override
     public String toString() {
-        return String.format("[Пикинер] %s", super.name + " " + position.toString());
+        return String.format("[Лучник] %s", super.name + " " + position.toString());
     }
 
 
@@ -60,7 +63,6 @@ public class Spearman extends Person {
             f.position.check(newPos); 
         }
         position = newPos;
-        history = name + "переместился на позицию" + position;
 
     }
     
@@ -82,6 +84,6 @@ public class Spearman extends Person {
 
     @Override
     public String getInfo() {
-        return "Пикинер";
+        return "Лучник";
     }
 }

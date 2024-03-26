@@ -15,6 +15,7 @@ public abstract class Person implements interStep{
     protected int agility;
     protected int defence;
     protected int iniciative;
+    protected String history;
 
     Random rdn = new Random();
 
@@ -32,6 +33,7 @@ public abstract class Person implements interStep{
         this.agility = 1;
         this.defence = 10;
         this.iniciative = iniciative;
+        this.history = "";
     }
 
     public void setPosititon (int x, int y) {
@@ -48,14 +50,18 @@ public abstract class Person implements interStep{
     public int getDamage (int damage) {
         int d = this.health - damage;
         return d;
-        /*boolean probability = (this.agility / 2) >= rdn.nextInt(10);
-        if (probability) {
-            return 0;
-        }
-        int loss = damage - (this.defence * damage) / 10;
-        loss = Math.min(loss, this.health);
-        this.health -= loss;
-        return loss;*/
     };
+
+    public int[] getCoords () {
+        return new int [] {position.getY(), position.getX()};
+    }
+
+    public int getHealth () {
+        return health;
+    }
+
+    public void getInfo(String str) {
+        System.out.println(str);
+    }
 
 }
