@@ -4,24 +4,30 @@ import java.util.ArrayList;
 
 //снайпер
 public class Sniper extends Person{
-    int arrow;
+
+    boolean ingame = true;
+    
     public Sniper (String name, int age, int x, int y) {
-        super(name, age, 20, 100, 50, 20, "arrow", 20, 1, x, y, 3);
-        this.arrow = 20;
+        super(name, age, 20, 200, 10, 20, "arrow", 20, 1, x, y, 3);
+        this.maxHealth = 200;
+    }
+
+    public void inGame (int hp) {
+        hp = this.health;
+        if (hp <= 0) {
+            this.ingame = false;
+            System.out.println("Не в игре");
+        }
     }
 
     public void attack (Person person) {
+        armor--;
         person.health -= this.power;
     }
 
     @Override
     public String toString() {
         return String.format("[Снайпер] %s", super.name + " " + position.toString());
-    }
-
-
-    protected void shot (Person target) {
-        armor -= 10;
     }
 
     public Person findNearsEnemy(ArrayList<Person> enemy) {
@@ -64,10 +70,11 @@ public class Sniper extends Person{
         position = newPos;
 
     }
-    
+
     @Override
     public void step(ArrayList<Person> enymies, ArrayList<Person> friends) {
         if (health <= 0) {
+            this.ingame = false;
             return;
         }
 

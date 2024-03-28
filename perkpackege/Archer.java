@@ -2,27 +2,31 @@ package perkpackege;
 import java.util.ArrayList;
 
 //арбалетчик
-public class Orcher extends Person {
-    int arrow;
+public class Archer extends Person {
 
-    public Orcher (String name, int age, int x, int y) {
-        super(name, age, 20, 100, 50, 20, "arrow", 20, 1 , x, y, 3);
-        this.arrow = 40;
+    boolean ingame = true;
 
+    public Archer (String name, int age, int x, int y) {
+        super(name, age, 20, 200, 10, 20, "arrow", 20, 1 , x, y, 3);
+        this.maxHealth = 200;
+    }
+
+    public void inGame (int hp) {
+        hp = this.health;
+        if (hp <= 0) {
+            this.ingame = false;
+            System.out.println("Не в игре");
+        }
     }
 
     public void attack (Person person) {
+        armor--;
         person.health -= this.power;
     }
 
     @Override
     public String toString() {
         return String.format("[Лучник] %s", super.name + " " + position.toString());
-    }
-
-
-    protected void shot (Person target) {
-        armor -= 10;
     }
 
     public Person findNearsEnemy(ArrayList<Person> enemy) {
@@ -65,10 +69,11 @@ public class Orcher extends Person {
         position = newPos;
 
     }
-    
+
     @Override
     public void step(ArrayList<Person> enymies, ArrayList<Person> friends) {
         if (health <= 0) {
+            this.ingame = false;
             return;
         }
 

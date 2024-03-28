@@ -14,11 +14,8 @@ public class Main {
     public static void  main (String [] args) {
         createTeam(darkTeam, 10, 0);
         createTeam(holyTeam, 10, 3);
-        //darkTeam.sort(new PrioritySort());
-        //holyTeam.sort(new PrioritySort());
         all.addAll(darkTeam);
         all.addAll(holyTeam);
-        //all.sort(new PrioritySort());
 
         Scanner nextEntr = new Scanner(System.in);
 
@@ -38,10 +35,9 @@ public class Main {
             if (!isLiv(darkTeam)) {
                 System.out.println("Победила светлая сторона");
             }
-            
         }
-
     }
+
     private static boolean isLiv (ArrayList<Person> perks) {
         for (Person perk : perks) {
             if (perk.getHealth() > 0) {
@@ -58,25 +54,25 @@ public class Main {
             int n = start + rdn.nextInt(4);
             switch (n) {
                 case 0:
-                team.add(new Orcher(getName(), 20, 0, cy));
+                team.add(new Archer(getName(), 20, 1, cy));
                 break;
                 case 1:
-                team.add(new Magician(getName(), 20, 0, cy));
+                team.add(new Magician(getName(), 20, 1, cy));
                 break;
                 case 2:
-                team.add(new Spearman(getName(), 20, 0, cy));
+                team.add(new Spearman(getName(), 20, 1, cy));
                 break;
                 case 3:
                 team.add(new Peasant(getName(), 20, start * 3 + 1, cy));
                 break;
                 case 4:
-                team.add(new Monk(getName(), 20, 9, cy));
+                team.add(new Monk(getName(), 20, 10, cy));
                 break;
                 case 5:
-                team.add(new Sniper(getName(), 20, 9, cy));
+                team.add(new Sniper(getName(), 20, 10, cy));
                 break;
                 case 6:
-                team.add(new Outlaw(getName(), 20, 9, cy));
+                team.add(new Outlaw(getName(), 20, 10, cy));
                 break;
             }
             cy++;
@@ -89,4 +85,14 @@ public class Main {
 }
 
 
+
+
+
+
+
+
+
+
+
 //git push -u origin main
+//getInfo - логи

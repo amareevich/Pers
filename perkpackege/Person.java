@@ -16,6 +16,7 @@ public abstract class Person implements interStep{
     protected int defence;
     protected int iniciative;
     protected String history;
+    protected int maxHealth;
 
     Random rdn = new Random();
 
@@ -34,12 +35,20 @@ public abstract class Person implements interStep{
         this.defence = 10;
         this.iniciative = iniciative;
         this.history = "";
-    }
+    };
+
+    public int getArmor () {
+        return this.armor;
+    };
+
+    public void setArmor (int strela) {
+        this.armor += strela;
+    };
 
     public void setPosititon (int x, int y) {
         position.setX(x);
         position.setY(y);
-    }
+    };
 
     public double distanceTo(Person target) {
         double x = position.getX() - target.position.getX();
@@ -54,14 +63,13 @@ public abstract class Person implements interStep{
 
     public int[] getCoords () {
         return new int [] {position.getY(), position.getX()};
-    }
+    };
 
     public int getHealth () {
         return health;
-    }
+    };
 
-    public void getInfo(String str) {
-        System.out.println(str);
-    }
-
+    public void healed (int health) {
+        this.health = Math.min(this.health + health, this.maxHealth);
+    };
 }

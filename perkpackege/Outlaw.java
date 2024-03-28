@@ -5,23 +5,28 @@ import java.util.ArrayList;
 //разбойник
 public class Outlaw extends Person{
 
+    boolean ingame = true;
+
     public Outlaw (String name, int age, int x, int y) {
-        super(name, age, 20, 100, 50, 20, "knife", 20, 1, x, y, 2);
+        super(name, age, 20, 500, 50, 20, "knife", 20, 1, x, y, 2);
+        this.maxHealth = 500;
+    }
+
+    public void inGame (int hp) {
+        hp = this.health;
+        if (hp <= 0) {
+            this.ingame = false;
+            System.out.println("Не в игре");
+        }
     }
 
     public void attack (Person person) {
         person.health -= this.power;
-        history = "attack" + person.name + "нанесено урона" + power;
     }
 
     @Override
     public String toString() {
-        return String.format("[Орчер] %s", super.name + " " + position.toString());
-    }
-
-
-    protected void shot (Person target) {
-        armor -= 10;
+        return String.format("[Разбойник] %s", super.name + " " + position.toString());
     }
 
     public Person findNearsEnemy(ArrayList<Person> enemy) {
@@ -62,13 +67,12 @@ public class Outlaw extends Person{
             f.position.check(newPos); 
         }
         position = newPos;
-        history = name + "переместился на позицию" + position;
-
     }
-    
+
     @Override
     public void step(ArrayList<Person> enymies, ArrayList<Person> friends) {
         if (health <= 0) {
+            this.ingame = false;
             return;
         }
 
@@ -84,12 +88,7 @@ public class Outlaw extends Person{
 
     @Override
     public String getInfo() {
-        return "Орчер";
+        return "Разбойник";
     }
 
-    @Override
-    
-    public void getInfo(String str) {
-        super.getInfo(str);
-    }
 }
