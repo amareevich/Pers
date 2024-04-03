@@ -3,37 +3,28 @@ import java.util.Random;
 
 public abstract class Person implements interStep{
     protected String name;
-    protected int age;
     protected int power;
-    protected int health;
-    protected int armor;
-    protected int endurance;
-    protected String weapon;
-    protected Point position;
-    protected int distance;
+    protected double health;
+    protected double maxHealth;
+    protected double defence;
     protected int damage;
-    protected int agility;
-    protected int defence;
+    protected int armor;
+    protected Point position;
     protected int iniciative;
     protected String history;
-    protected int maxHealth;
+    protected boolean ingame;
 
     Random rdn = new Random();
 
-    public Person (String name, int age, int power, int health, int armor, int endurance, String weapon, int gold, int distance, int x, int y, int iniciative) {
+    public Person (String name, int power, double health, double defence, int armor, int x, int y, int iniciative, boolean ingame) {
         this.name = name;
-        this.age = age;
         this.power = power;
         this.health = health;
+        this.defence = defence;
         this.armor = armor;
-        this.endurance = endurance;
-        this.weapon = weapon;
-        this.distance = distance;
-        this.damage = 10;
         this.position = new Point(x,y);
-        this.agility = 1;
-        this.defence = 10;
         this.iniciative = iniciative;
+        this.ingame = ingame;
         this.history = "";
     };
 
@@ -41,11 +32,12 @@ public abstract class Person implements interStep{
         return this.armor;
     };
 
+
     public void setArmor (int strela) {
         this.armor += strela;
     };
 
-    public void setPosititon (int x, int y) {
+    public void setPosititon (double x, double y) {
         position.setX(x);
         position.setY(y);
     };
@@ -57,19 +49,23 @@ public abstract class Person implements interStep{
     };
 
     public int getDamage (int damage) {
-        int d = this.health - damage;
-        return d;
+        return damage;
     };
 
-    public int[] getCoords () {
-        return new int [] {position.getY(), position.getX()};
+    public double[] getCoords () {
+        return new double[] {position.getY(), position.getX()};
     };
 
-    public int getHealth () {
+    public double getHealth () {
         return health;
     };
 
-    public void healed (int health) {
+    public void healed (double health) {
         this.health = Math.min(this.health + health, this.maxHealth);
     };
+
+    public String getInfo (String log) {
+        this.history += log;
+        return this.history;
+    }
 }

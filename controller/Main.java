@@ -31,9 +31,11 @@ public class Main {
             nextEntr.nextLine();
             if (!isLiv(holyTeam)) {
                 System.out.println("Победила темная сторона");
+                nextEntr.close();
             }
             if (!isLiv(darkTeam)) {
                 System.out.println("Победила светлая сторона");
+                nextEntr.close();
             }
         }
     }

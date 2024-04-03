@@ -1,47 +1,69 @@
 package perkpackege;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 //разбойник
 public class Outlaw extends Person{
 
-    boolean ingame = true;
-
     public Outlaw (String name, int age, int x, int y) {
-        super(name, age, 20, 500, 50, 20, "knife", 20, 1, x, y, 2);
-        this.maxHealth = 500;
-    }
-
-    public void inGame (int hp) {
-        hp = this.health;
-        if (hp <= 0) {
-            this.ingame = false;
-            System.out.println("Не в игре");
-        }
+        super(name, 120, 800, 600, 20, x, y, 2, true);
+        this.maxHealth = 800;
+        this.damage = getDamage(damage);
     }
 
     public void attack (Person person) {
-        person.health -= this.power;
+
+        Random rdm = new Random();
+        
+        if (rdm.nextInt(25) == 7) {
+            person.damage -= this.power * 3;
+        };
+
+        person.damage = this.power;
+        this.history += this.name + " нанес " + this.damage + " " + person.name + "///";
+    }
+
+    public void Damage () {
+
+        this.history += this.name + " получил " + this.damage + " урона" + "///";
+
+        Random rdm = new Random();
+        double dmg = this.damage * 0.9;
+        if (this.defence < 0) {
+            this.health -= this.damage;
+        } else {
+            if (this.health < 30 || rdm.nextInt(10) == 3) {
+                this.power = 500;
+                System.out.println(this.name + " " + "Увернулся во тьме от атаки");
+            } else {
+                this.power = this.power;
+                this.defence -= dmg;
+                this.health -= this.damage - dmg;
+            }
+        }
+
     }
 
     @Override
     public String toString() {
-        return String.format("[Разбойник] %s", super.name + " " + position.toString());
+        return String.format("[Разбойник] %s", super.name + "❤\uFE0F:" + this.health + " " + "\uD83D\uDEE1\uFE0F:" + this.defence + " " +  "\uD834\uDD1C:" + position.toString());
     }
 
     public Person findNearsEnemy(ArrayList<Person> enemy) {
         Person target = null;
-        double distance = Integer.MAX_VALUE;
+        double distance = 500;
 
         for(Person p : enemy) {
-            double n = p.distanceTo(this);
+            if (p.ingame != false) {
+                double n = distanceTo(this);
 
-            if(n < distance) {
-                distance = n;
-                target = p;
+                if(n < distance) {
+                    distance = n;
+                    target = p;
+                }
             }
         }
-
         return target;
     }
 
@@ -49,8 +71,8 @@ public class Outlaw extends Person{
         Point delta = position.getDelta(target.position);
         Point newPos = new Point(position.getX(), position.getY());
 
-        int dx = delta.getX();
-        int dy = delta.getY();
+        double dx = delta.getX();
+        double dy = delta.getY();
 
         if (dx != 0) {
             dx = Math.abs(dx) / dx;
@@ -71,18 +93,26 @@ public class Outlaw extends Person{
 
     @Override
     public void step(ArrayList<Person> enymies, ArrayList<Person> friends) {
-        if (health <= 0) {
+
+        if (this.health <= 0) {
+
+            this.health = 0;
+            this.defence = 0;
             this.ingame = false;
             return;
-        }
 
-        Person target = this.findNearsEnemy(enymies);
+        } else {
 
-        if(distanceTo(target) < 2) {
-            attack(target);
-        }
-        else {
-            move(target, friends);
+            Damage();
+
+            Person target = findNearsEnemy(enymies);
+
+            if(distanceTo(target) < 2) {
+                attack(target);
+            }
+            else {
+                move(target, friends);
+            }
         }
     }
 

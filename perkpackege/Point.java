@@ -1,30 +1,30 @@
 package perkpackege;
 
 public class Point {
-    private int curX;
-    private int curY;
+    private double curX;
+    private double curY;
 
-    private int width;
-    private int heigth;
+    private double width;
+    private double heigth;
 
-    public  Point(int x, int y) {
+    public  Point(double x, double y) {
         this.curX = x;
         this.curY = y;
         width = 10;
         heigth = 10;
     }
 
-    public int getX() {return curX;}
-    public int getY() {return curY;}
+    public double getX() {return curX;}
+    public double getY() {return curY;}
 
-    public void setX(int x) {curX = x;}
-    public void setY(int y) {curY = y;}
+    public void setX(double x) {curX = x;}
+    public void setY(double y) {curY = y;}
 
-    public boolean isMove (int x, int y) {
+    public boolean isMove (double x, double y) {
         return x >= 0 && x < width && y >= 0 && y < heigth;
     }
 
-    public void moveTo (int dx, int dy) {
+    public void moveTo (double dx, double dy) {
         if(isMove(curX + dx, curY + dy)) {
             curX += dx;
             curY += dy;
@@ -43,7 +43,7 @@ public class Point {
         return curX == fcor.curX && curY == fcor.curY;
     }
 
-    public void add (int dx, int dy) {
+    public void add (double dx, double dy) {
         curX += dx;
         curY += dy;
     }
